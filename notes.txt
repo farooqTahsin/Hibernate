@@ -1,0 +1,36 @@
+- Code To Save Object To DataBase:
+	Student student = new Student();
+    	student.setId(1752601);
+    	student.setName("Eyad Ahmad");
+	Configuration con = new Configuration().configure().addAnnotatedClass(Student.class);
+    	StandardServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
+    	SessionFactory sf = con.buildSessionFactory(reg);
+    	Session session = (Session) sf.openSession();
+    	Transaction tx = session.beginTransaction();
+    	session.save(student);
+        tx.commit();
+
+
+- Code To Fetish Object From DataBase:
+	Student student = null; 
+    	Configuration con = new Configuration().configure().addAnnotatedClass(Student.class);
+    	StandardServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
+    	SessionFactory sf = con.buildSessionFactory(reg);
+    	Session session = (Session) sf.openSession();
+    	Transaction tx = session.beginTransaction();
+        tx.commit();   
+        student = session.get(Student.class, 2141467);
+        System.out.print(student.toString());
+
+
+- Anontation:
+	- @Entity
+	- @Entity(name="std_table") :if i want to create table with specific name.
+	- @Id : Primary Key.
+	- @Column(name="std_Id") : To Change The Name Of Field In The Table
+	- @Transient : This Mean That This Field Will Not Store In The DataBase.
+
+
+- Properties: 
+	- <property name="hbm2ddl.auto">update</property> : If There Is no table, it will create a table for us.
+	- <property name="show_sql">true</property> : Show SQL Statement In The Console.
